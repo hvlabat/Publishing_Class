@@ -4,11 +4,11 @@ author: "Hugo Labat"
 date: "`r Sys.Date()`"
 output: html_document
 ---
-##Code
+## Code
 
 Below, we are setting up the required libraries to perform the project.
 
-```{r setup}
+```{r setup,warning=FALSE,message=FALSE}
 library(tidyverse)
 library(here)
 ```
@@ -26,11 +26,15 @@ df <- df %>% mutate(trial_num=as.numeric(str_sub(trials,6,7))) %>% #making sure 
 
 #plotting data
 p <- ggplot(df,aes(x=trial_num,y=mean,color=regions))
-p+geom_jitter(height=0,width=0.1,alpha=0.3)+geom_smooth(formula=y~x,method=lm)
+p+geom_jitter(height=0,width=0.1,alpha=0.3)+
+  geom_smooth(formula=y~x,method=lm)+
+  labs(title="Step Mass per Region per Trial")+
+  xlab("Trial Number")+
+  ylab("Mean Data")
 
 #saves figure into output folder
 ggsave(here("output","figs","foot_use_data_plot.png"))
 ```
 
-##Summary
+## Summary
 All done!
